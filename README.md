@@ -26,6 +26,7 @@ You can manage several DNS records in the specified DNS zone :
 - `A` records by manipulating `a_records` variable. Record is based on the official [Azure `A` record resource](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_a_record)
 - `AAAA` records by manipulating `aaaa_records` variable. Record is based on the official [Azure `AAAA` record resource](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_aaaa_record)
 - `MX` records by manipulating `mx_records` variable. Record is based on the official [Azure `MX` record resource](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_mx_record)
+- `SRV` records by manipulating `srv_records` variable. Record is based on the official [Azure `SRV` record resource](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_srv_record)
 - `SOA` record is a special record and unique for the specified DNS zone. It can be managed only if you also choose to create the DNS zone. Check `Create the DNS zone` paragraph.
 
 ## Usage
