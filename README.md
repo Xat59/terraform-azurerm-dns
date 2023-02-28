@@ -35,7 +35,7 @@ An example that creates the DNS zone with A and SOA records :
 
 ```hcl
 module "dns" {}
-  source = "github.com/scalair/terraform-azurerm-dns"
+  source = "github.com/Xat59/terraform-azurerm-dns"
 
   zone_name           = "az.domain.net"
   resource_group_name = "rg-monitoring01"
@@ -61,7 +61,7 @@ module "dns" {}
 
     tags = {
       "env"   = "prod"
-      "owner" = "scalair"
+      "owner" = "Xat59"
     }
   }
 }
@@ -71,7 +71,7 @@ An example that creates A records in an existing DNS zone :
 
 ```hcl
 module "dns" {
-  source = "github.com/scalair/terraform-azurerm-dns"
+  source = "github.com/Xat59/terraform-azurerm-dns"
 
   zone_name           = "az.domain.net"
   resource_group_name = "rg-monitoring01"
@@ -97,7 +97,7 @@ An example that creates the DNS zone, then create MX records for it :
 
 ```hcl
 module "dns" {
-  source = "github.com/scalair/terraform-azurerm-dns"
+  source = "github.com/Xat59/terraform-azurerm-dns"
 
   zone_name           = "az.domain.net"
   resource_group_name = "rg-monitoring01"
@@ -115,6 +115,39 @@ module "dns" {
       {
         preference  = 20,
         exchange    = "mail2.contoso.com"
+      }
+    ]
+  }
+}
+```
+
+
+An example that creates the DNS zone, then create SRV records for it :
+
+```hcl
+module "dns" {
+  source = "github.com/Xat59/terraform-azurerm-dns"
+
+  zone_name           = "az.domain.net"
+  resource_group_name = "rg-monitoring01"
+
+  create_dns_zone     = true
+
+  srv_records   = {
+    name    = "testsrv"
+    ttl     = 3600
+    records = [
+      {
+        priority = 10
+        weight   = 80
+        port     = 8080
+        target   = "srv.test.bla"
+      },
+      {
+        priority = 20
+        weight   = 100
+        port     = 8080
+        target   = "srv2.test.bla"
       }
     ]
   }
