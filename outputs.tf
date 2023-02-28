@@ -38,6 +38,11 @@ output "mx_record_id" {
   value         =  var.create_dns_zone ? (var.public_dns_zone ? azurerm_dns_mx_record.mx_record_public_with_zone.*.id : azurerm_private_dns_mx_record.mx_record_private_with_zone.*.id) : (var.public_dns_zone ? azurerm_dns_mx_record.mx_record_public_no_zone.*.id : azurerm_private_dns_mx_record.mx_record_private_no_zone.*.id)
 }
 
+output "srv_record_id" {
+  description   = "A list of DNS SRV Record ID."
+  value         =  var.create_dns_zone ? (var.public_dns_zone ? azurerm_dns_srv_record.srv_record_public_with_zone.*.id : azurerm_private_dns_srv_record.srv_record_private_with_zone.*.id) : (var.public_dns_zone ? azurerm_dns_srv_record.srv_record_public_no_zone.*.id : azurerm_private_dns_srv_record.srv_record_private_no_zone.*.id)
+}
+
 output "mx_record_fqdn" {
   description   = "A list of DNS MX Record FQDN."
   value         =  var.create_dns_zone ? (var.public_dns_zone ? azurerm_dns_mx_record.mx_record_public_with_zone.*.fqdn : azurerm_private_dns_mx_record.mx_record_private_with_zone.*.fqdn) : (var.public_dns_zone ? azurerm_dns_mx_record.mx_record_public_no_zone.*.fqdn : azurerm_private_dns_mx_record.mx_record_private_no_zone.*.fqdn)
