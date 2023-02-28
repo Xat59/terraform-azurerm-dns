@@ -38,6 +38,12 @@ variable "mx_records" {
   default       = {}
 }
 
+variable "srv_records" {
+  type          = any
+  description   = "(Optional) Specifies a map of SRV records to create in the specified DNS zone."
+  default       = {}
+}
+
 variable "zone_tags" {
   type          = map(string)
   description   = "(Optional) A mapping of tags to assign to the created DNS zone."
