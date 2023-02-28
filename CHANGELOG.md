@@ -6,6 +6,7 @@
 ### Added
 
 - support for SRV records.
+- use DNS zone name from the execution when creating records from a zone created with the module. 
 
 ## v0.1.0
 
