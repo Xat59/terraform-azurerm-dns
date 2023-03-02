@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 # terraform-azurerm-dns
 
 Terraform module to manage public or private Azure DNS zone, and DNS records.
@@ -31,128 +32,75 @@ You can manage several DNS records in the specified DNS zone :
 
 ## Usage
 
-An example that creates the DNS zone with A and SOA records :
+Take a look at the [`examples` directory](./examples/) to have example usage.
 
-```hcl
-module "dns" {}
-  source = "github.com/Xat59/terraform-azurerm-dns"
+## Requirements
 
-  zone_name           = "az.domain.net"
-  resource_group_name = "rg-monitoring01"
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
 
-  create_dns_zone     = true
+## Providers
 
-  a_records   = [
-    {
-      name    = "www"
-      records = ["10.10.10.1"]
-      ttl     = 3600
-    },
-    {
-      name    = "myshop"
-      records = ["10.10.10.2"]
-      ttl     = 3600
-    }
-  ]
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
 
-  soa_record = {
-    email     = "admin"
-    host_name = "ns1-03.azure-dns.com."
+## Modules
 
-    tags = {
-      "env"   = "prod"
-      "owner" = "Xat59"
-    }
-  }
-}
-```
+No modules.
 
-An example that creates A records in an existing DNS zone :
+## Resources
 
-```hcl
-module "dns" {
-  source = "github.com/Xat59/terraform-azurerm-dns"
+| Name | Type |
+|------|------|
+| [azurerm_dns_a_record.a_record_public_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_a_record) | resource |
+| [azurerm_dns_a_record.a_record_public_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_a_record) | resource |
+| [azurerm_dns_aaaa_record.aaaa_record_public_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_aaaa_record) | resource |
+| [azurerm_dns_aaaa_record.aaaa_record_public_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_aaaa_record) | resource |
+| [azurerm_dns_mx_record.mx_record_public_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_mx_record) | resource |
+| [azurerm_dns_mx_record.mx_record_public_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_mx_record) | resource |
+| [azurerm_dns_srv_record.srv_record_public_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_srv_record) | resource |
+| [azurerm_dns_srv_record.srv_record_public_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_srv_record) | resource |
+| [azurerm_dns_zone.zone_public](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_zone) | resource |
+| [azurerm_private_dns_a_record.a_record_private_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_dns_a_record.a_record_private_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_dns_aaaa_record.aaaa_record_private_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_aaaa_record) | resource |
+| [azurerm_private_dns_aaaa_record.aaaa_record_private_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_aaaa_record) | resource |
+| [azurerm_private_dns_mx_record.mx_record_private_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_mx_record) | resource |
+| [azurerm_private_dns_mx_record.mx_record_private_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_mx_record) | resource |
+| [azurerm_private_dns_srv_record.srv_record_private_no_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_srv_record) | resource |
+| [azurerm_private_dns_srv_record.srv_record_private_with_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_srv_record) | resource |
+| [azurerm_private_dns_zone.zone_private](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_zone) | resource |
 
-  zone_name           = "az.domain.net"
-  resource_group_name = "rg-monitoring01"
+## Inputs
 
-  create_dns_zone     = false
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_a_records"></a> [a\_records](#input\_a\_records) | (Optional) Specifies a list of A records to create in the specified DNS zone. | `list(any)` | `[]` | no |
+| <a name="input_aaaa_records"></a> [aaaa\_records](#input\_aaaa\_records) | (Optional) Specifies a list of AAAA records to create in the specified DNS zone. | `list(any)` | `[]` | no |
+| <a name="input_create_dns_zone"></a> [create\_dns\_zone](#input\_create\_dns\_zone) | (Optional) Whether or not create the DNS zone. | `bool` | `true` | no |
+| <a name="input_mx_records"></a> [mx\_records](#input\_mx\_records) | (Optional) Specifies a map of MX records to create in the specified DNS zone. | `any` | `{}` | no |
+| <a name="input_public_dns_zone"></a> [public\_dns\_zone](#input\_public\_dns\_zone) | (Optional) Whether or not the created DNS zone is public. | `bool` | `false` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| <a name="input_srv_records"></a> [srv\_records](#input\_srv\_records) | (Optional) Specifies a map of SRV records to create in the specified DNS zone. | `any` | `{}` | no |
+| <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name) | (Required) Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| <a name="input_zone_tags"></a> [zone\_tags](#input\_zone\_tags) | (Optional) A mapping of tags to assign to the created DNS zone. | `map(string)` | `{}` | no |
 
-  a_records   = [
-    {
-      name    = "www"
-      records = ["10.10.10.1"]
-      ttl     = 3600
-    },
-    {
-      name    = "myshop"
-      records = ["10.10.10.2"]
-      ttl     = 3600
-    }
-  ]
-}
-```
+## Outputs
 
-An example that creates the DNS zone, then create MX records for it :
-
-```hcl
-module "dns" {
-  source = "github.com/Xat59/terraform-azurerm-dns"
-
-  zone_name           = "az.domain.net"
-  resource_group_name = "rg-monitoring01"
-
-  create_dns_zone     = true
-
-  mx_records   = {
-    name    = "mail"
-    ttl     = 3600
-    records = [
-      {
-        preference  = 10,
-        exchange    = "mail1.contoso.com"
-      },
-      {
-        preference  = 20,
-        exchange    = "mail2.contoso.com"
-      }
-    ]
-  }
-}
-```
-
-
-An example that creates the DNS zone, then create SRV records for it :
-
-```hcl
-module "dns" {
-  source = "github.com/Xat59/terraform-azurerm-dns"
-
-  zone_name           = "az.domain.net"
-  resource_group_name = "rg-monitoring01"
-
-  create_dns_zone     = true
-
-  srv_records   = {
-    name    = "testsrv"
-    ttl     = 3600
-    records = [
-      {
-        priority = 10
-        weight   = 80
-        port     = 8080
-        target   = "srv.test.bla"
-      },
-      {
-        priority = 20
-        weight   = 100
-        port     = 8080
-        target   = "srv2.test.bla"
-      }
-    ]
-  }
-}
-```
+| Name | Description |
+|------|-------------|
+| <a name="output_a_record_fqdn"></a> [a\_record\_fqdn](#output\_a\_record\_fqdn) | A list of DNS A Record FQDN. |
+| <a name="output_a_record_id"></a> [a\_record\_id](#output\_a\_record\_id) | A list of DNS A Record ID. |
+| <a name="output_aaaa_record_fqdn"></a> [aaaa\_record\_fqdn](#output\_aaaa\_record\_fqdn) | A list of DNS AAAA Record FQDN. |
+| <a name="output_aaaa_record_id"></a> [aaaa\_record\_id](#output\_aaaa\_record\_id) | A list of DNS AAAA Record ID. |
+| <a name="output_mx_record_fqdn"></a> [mx\_record\_fqdn](#output\_mx\_record\_fqdn) | A list of DNS MX Record FQDN. |
+| <a name="output_mx_record_id"></a> [mx\_record\_id](#output\_mx\_record\_id) | A list of DNS MX Record ID. |
+| <a name="output_srv_record_id"></a> [srv\_record\_id](#output\_srv\_record\_id) | A list of DNS SRV Record ID. |
+| <a name="output_zone_id"></a> [zone\_id](#output\_zone\_id) | The DNS Zone ID. |
+| <a name="output_zone_max_number_of_record_sets"></a> [zone\_max\_number\_of\_record\_sets](#output\_zone\_max\_number\_of\_record\_sets) | Maximum number of Records in the zone. |
+| <a name="output_zone_number_of_record_sets"></a> [zone\_number\_of\_record\_sets](#output\_zone\_number\_of\_record\_sets) | The number of records already in the zone. |
 
 ## Contribute
 
@@ -161,3 +109,4 @@ You can contribute by adding support for :
 - any DNS records that is not yet implemented.
 - `soa_record` block in public and private DNS zone.
 - any other ideas are welcome ;)
+<!-- END_TF_DOCS -->
